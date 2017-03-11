@@ -3,9 +3,9 @@ import ListItem from './ListItem.jsx';
 
 const List = (props) => (
   <div>
-    <h4> List Component </h4>
-    There are { props.items.length } items.
-    { props.items.map(item => <ListItem item={item}/>)}
+    <h3> HERE'S YOUR LIST! </h3>
+    { props.hitlist.map(shop => <ListItem shop={shop}/>)}
+    Now hurry & go grab a bite at one of these { props.hitlist.length } shops!
   </div>
 )
 

@@ -1,16 +1,13 @@
-DROP DATABASE IF EXISTS test;
+DROP DATABASE IF EXISTS toEat;
 
-CREATE DATABASE test;
+CREATE DATABASE toEat;
 
-USE test;
+USE toEat;
 
-CREATE TABLE items (
-  id int NOT NULL AUTO_INCREMENT,
-  quantity integer NOT NULL,
-  description varchar(50) NOT NULL,
-  PRIMARY KEY (ID)
+CREATE TABLE dessertShops (
+  zipCode INT(5) NOT NULL,
+  name VARCHAR(100) NOT NULL UNIQUE,
+  rating DECIMAL(2, 1) NOT NULL,
+  reviewCount INT NOT NULL,
+  url VARCHAR(500) NOT NULL
 );
-
-/*  Execute this file from the command line by typing:
- *    mysql -u root < server/schema.sql
- *  to create the database and the tables.*/

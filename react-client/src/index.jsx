@@ -2,33 +2,61 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import $ from 'jquery';
 import List from './components/List.jsx';
+import Search from './components/Search.jsx';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { 
-      items: []
+    this.state = {
+      hitlist: []
     }
+
+    this.search = this.search.bind(this);
+    this.getList = this.getList.bind(this);
   }
 
-  componentDidMount() {
+  // POST
+  search (input) {
+    var data = {zipcode: input};
     $.ajax({
-      url: '/items', 
+      url: '/hitlist/search',
+      type: 'POST',
+      data: JSON.stringify(data),
+      success: () => {
+        console.log('-----> LIST GENERATED')
+      },
+
+      error: (error) => {
+        console.log('-----> ERROR', error);
+      }
+    });
+  }
+
+  // GET
+  getList () {
+    $.ajax({
+      url: '/hitlist',
+      type: 'GET',
+      contentType: 'application/json',
+
       success: (data) => {
         this.setState({
-          items: data
+          hitlist: data
         })
+        console.log('-----> ')
       },
-      error: (err) => {
-        console.log('err', err);
+
+      error: (error) => {
+        console.log('-----> ERROR', error);
       }
     });
   }
 
   render () {
     return (<div>
-      <h1>Item List</h1>
-      <List items={this.state.items}/>
+      <h1>DESSERT HIT LIST</h1>
+      <Search search={this.search}/>
+      <List hitlist={this.state.hitlist}/>
     </div>)
   }
 }
