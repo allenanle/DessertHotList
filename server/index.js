@@ -5,7 +5,7 @@ var bodyParser = require('body-parser');
 app.use( bodyParser.json() );
 
 // UNCOMMENT THE DATABASE YOU'D LIKE TO USE
-var database = require('../database-mysql');
+var dbWorker = require('../database-mysql');
 // var items = require('../database-mongo');
 
 var request = require('request');
@@ -19,7 +19,7 @@ app.use(express.static(__dirname + '/../react-client/dist'));
 
 app.post('/hitlist/search', function(req, res) {
   // console.log('-----> REQ', req)
-  var zipCodeSearch = req.body.zipcode;
+  var zipCodeSearch = req.body.zipCode;
   console.log('-----> ZIPCODE', zipCodeSearch);
 
   var yelpRequest = {
@@ -40,11 +40,11 @@ app.post('/hitlist/search', function(req, res) {
       body.businesses.forEach(function(shopObj) {
         console.log('-----> SHOP\'S NAME', shopObj.name);
 
-        database.post(zipCodeSearch, shopObj, function(error, success) {
+        dbWorker.post(zipCodeSearch, shopObj, function(error, success) {
           if (error) {
-            res.status(409).send();
+            res.status(409).send('-----> SERVER ERROR...');
           } else if (success) {
-            res.status(201).send();
+            res.status(201).send('-----> SERVER ALL GOOD!');
           }
         });
       })
@@ -53,9 +53,9 @@ app.post('/hitlist/search', function(req, res) {
 });
 
 app.get('/hitlist', function (req, res) {
-  items.selectAll(function(err, data) {
+  dbWorker.get(function(err, data) {
     if (err) {
-      res.sendStatus(500);
+      res.sendStatus(409);
     } else {
       res.json(data);
     }

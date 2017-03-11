@@ -7,16 +7,17 @@ class Search extends React.Component {
       input: ''
     }
     this.onChange = this.onChange.bind(this);
-    this.search = this.search.bind(this);
+    this.onSearch = this.onSearch.bind(this);
   }
 
-  onChange (e) {
+  onChange (event) {
     this.setState({
-      input: e.target.value
+      input: event.target.value
+    console.log('---> AS TYPING', this.state.input);
     });
   }
 
-  search() {
+  onSearch() {
     this.props.search(this.state.input);
   }
 
@@ -24,7 +25,7 @@ class Search extends React.Component {
     return (
     <div>
       ENTER A ZIP CODE: <input value={this.state.input} onChange={this.onChange}/>
-      <button onClick={this.search}>  MAGIC!  </button>
+      <button onClick={this.onSearch}>  MAGIC!  </button>
     </div>)
   }
 }

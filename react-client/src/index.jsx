@@ -10,24 +10,24 @@ class App extends React.Component {
     this.state = {
       hitlist: []
     }
-
     this.search = this.search.bind(this);
     this.getList = this.getList.bind(this);
   }
 
   // POST
   search (input) {
-    var data = {zipcode: input};
+    var zipCode = {zipCode: input};
     $.ajax({
       url: '/hitlist/search',
       type: 'POST',
-      data: JSON.stringify(data),
+      contentType: 'application/json',
+      data: JSON.stringify(zipCode),
       success: () => {
-        console.log('-----> LIST GENERATED')
+        console.log('---> LIST GENERATED')
       },
 
       error: (error) => {
-        console.log('-----> ERROR', error);
+        console.log('---> SERVER ERROR', error);
       }
     });
   }
@@ -43,11 +43,11 @@ class App extends React.Component {
         this.setState({
           hitlist: data
         })
-        console.log('-----> ')
+        console.log('---> LIST GENERATED!')
       },
 
       error: (error) => {
-        console.log('-----> ERROR', error);
+        console.log('---> ERROR', error);
       }
     });
   }
