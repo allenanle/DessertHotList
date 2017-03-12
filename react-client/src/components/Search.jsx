@@ -13,8 +13,11 @@ class Search extends React.Component {
   onChange (event) {
     this.setState({
       input: event.target.value
-    console.log('---> AS TYPING', this.state.input);
     });
+
+    if (event.charCode == 13) {
+      this.onSearch();
+    }
   }
 
   onSearch() {
@@ -24,7 +27,7 @@ class Search extends React.Component {
   render() {
     return (
     <div>
-      ENTER A ZIP CODE: <input value={this.state.input} onChange={this.onChange}/>
+      ENTER A ZIP CODE: <input value={this.state.input} onChange={this.onChange} onKeyPress={this.onChange}/>
       <button onClick={this.onSearch}>  MAGIC!  </button>
     </div>)
   }

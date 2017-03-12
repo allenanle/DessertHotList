@@ -38,13 +38,16 @@ app.post('/hitlist/search', function(req, res) {
     } else {
       // pass data to models to store into database
       body.businesses.forEach(function(shopObj) {
-        console.log('-----> SHOP\'S NAME', shopObj.name);
 
-        dbWorker.post(zipCodeSearch, shopObj, function(error, success) {
+        dbWorker.post(zipCodeSearch, shopObj, function(error) {
           if (error) {
-            res.status(409).send('-----> SERVER ERROR...');
-          } else if (success) {
-            res.status(201).send('-----> SERVER ALL GOOD!');
+            dbWorker.get(zipCodeSearch, function(data) {
+              console.log('---> DATA', data);
+              res.status(200).send(data);
+              console.log('---> GETTING RFOM DATABASE!');
+            });
+          } else {
+            res.status(201).send();
           }
         });
       })
@@ -53,12 +56,9 @@ app.post('/hitlist/search', function(req, res) {
 });
 
 app.get('/hitlist', function (req, res) {
-  dbWorker.get(function(err, data) {
-    if (err) {
-      res.sendStatus(409);
-    } else {
-      res.json(data);
-    }
+  var zipCodeSearch = req.body.zipCode;
+  dbWorker.get(zipCodeSearch, function(data) {
+      res.status(200).send(data);
   });
 });
 

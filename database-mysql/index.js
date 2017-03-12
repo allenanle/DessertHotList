@@ -13,31 +13,30 @@ exports.post = function(zipCodeSearch, shopData, callback) {
     name: shopData.name,
     rating: shopData.rating,
     reviewCount: shopData.review_count,
+
     // shorten the url
     url: shopData.url.slice(0, shopData.url.indexOf('?'))
   }
-
-  console.log(shopInfo);
 
   var sqlQuery = 'INSERT INTO dessertShops SET ?;';
 
   connection.query(sqlQuery, shopInfo, function(error, data) {
     if (error) {
-      console.error('-----> SQL ERROR', error);
+      console.error('-----> `POST` ERROR', error);
+      callback(error);
     } else {
       console.log('-----> SHOP INFO STORED!');
     }
   });
 };
 
-exports.get = function(callback) {
-  var sqlQuery = 'SELECT * FROM dessertShops';
+exports.get = function(zipCodeSearch, callback) {
+  var sqlQuery = 'SELECT * FROM dessertShops WHERE zipCode = ?;';
 
-  connection.query(sqlQuery, function(error, data) {
+  connection.query(sqlQuery, zipCodeSearch, function(error, data) {
     if (error) {
-      console.error('-----> SQL ERROR', error);
+      console.error('-----> `GET` ERROR', error);
     } else {
-      console.log(data);
       console.log('-----> SHOP INFO RETRIEVED!');
       callback(data);
     }

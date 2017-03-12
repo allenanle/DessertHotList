@@ -8,6 +8,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      zipCode: '_____',
       hitlist: []
     }
     this.search = this.search.bind(this);
@@ -17,13 +18,19 @@ class App extends React.Component {
   // POST
   search (input) {
     var zipCode = {zipCode: input};
+
+    this.setState({
+      zipCode: input
+    });
+
     $.ajax({
       url: '/hitlist/search',
       type: 'POST',
       contentType: 'application/json',
       data: JSON.stringify(zipCode),
       success: () => {
-        console.log('---> LIST GENERATED')
+        console.log('---> LIST GENERATED!')
+        this.getList();
       },
 
       error: (error) => {
@@ -43,11 +50,11 @@ class App extends React.Component {
         this.setState({
           hitlist: data
         })
-        console.log('---> LIST GENERATED!')
+        console.log('---> LIST RETRIEVED!')
       },
 
       error: (error) => {
-        console.log('---> ERROR', error);
+        console.log('---> `GET` ERROR', error);
       }
     });
   }
@@ -56,7 +63,10 @@ class App extends React.Component {
     return (<div>
       <h1>DESSERT HIT LIST</h1>
       <Search search={this.search}/>
-      <List hitlist={this.state.hitlist}/>
+
+      <List hitlist={this.state.hitlist}
+            zipCode={this.state.zipCode}
+      />
     </div>)
   }
 }
