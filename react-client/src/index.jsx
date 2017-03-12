@@ -34,7 +34,7 @@ class App extends React.Component {
       },
 
       error: (error) => {
-        console.log('---> SERVER ERROR', error);
+        console.log('---> `POST` ERROR');
       }
     });
   }

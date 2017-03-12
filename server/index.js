@@ -38,14 +38,11 @@ app.post('/hitlist/search', function(req, res) {
     } else {
       // pass data to models to store into database
       body.businesses.forEach(function(shopObj) {
+        console.log('-----> SHOP\'S NAME', shopObj.name);
 
         dbWorker.post(zipCodeSearch, shopObj, function(error) {
-          if (error) {
-            dbWorker.get(zipCodeSearch, function(data) {
-              console.log('---> DATA', data);
-              res.status(200).send(data);
-              console.log('---> GETTING RFOM DATABASE!');
-            });
+          if (error === null) {
+            res.status(409).send();
           } else {
             res.status(201).send();
           }
@@ -56,8 +53,7 @@ app.post('/hitlist/search', function(req, res) {
 });
 
 app.get('/hitlist', function (req, res) {
-  var zipCodeSearch = req.body.zipCode;
-  dbWorker.get(zipCodeSearch, function(data) {
+  dbWorker.get(function(data) {
       res.status(200).send(data);
   });
 });
@@ -65,4 +61,3 @@ app.get('/hitlist', function (req, res) {
 app.listen(3000, function() {
   console.log('listening on port 3000!');
 });
-

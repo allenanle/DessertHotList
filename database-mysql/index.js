@@ -30,10 +30,10 @@ exports.post = function(zipCodeSearch, shopData, callback) {
   });
 };
 
-exports.get = function(zipCodeSearch, callback) {
-  var sqlQuery = 'SELECT * FROM dessertShops WHERE zipCode = ?;';
+exports.get = function(callback) {
+  var sqlQuery = 'SELECT * FROM dessertShops;';
 
-  connection.query(sqlQuery, zipCodeSearch, function(error, data) {
+  connection.query(sqlQuery, function(error, data) {
     if (error) {
       console.error('-----> `GET` ERROR', error);
     } else {
