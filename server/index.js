@@ -38,7 +38,7 @@ app.post('/hitlist/search', function(req, res) {
     } else {
       // pass data to models to store into database
       body.businesses.forEach(function(shopObj) {
-        console.log('-----> SHOP\'S NAME', shopObj.name);
+        console.log("-----> NAME", shopObj.name);
 
         dbWorker.post(zipCodeSearch, shopObj, function(error) {
           if (error === null) {

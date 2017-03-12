@@ -13,6 +13,7 @@ class App extends React.Component {
     }
     this.search = this.search.bind(this);
     this.getList = this.getList.bind(this);
+    this.getList();
   }
 
   // POST
@@ -61,7 +62,7 @@ class App extends React.Component {
 
   render () {
     return (<div>
-      <h1>DESSERT HIT LIST</h1>
+      <h1><u> DESSERT HIT LIST </u></h1>
       <Search search={this.search}/>
 
       <List hitlist={this.state.hitlist}

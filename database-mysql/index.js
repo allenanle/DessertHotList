@@ -25,7 +25,7 @@ exports.post = function(zipCodeSearch, shopData, callback) {
       console.error('-----> `POST` ERROR', error);
       callback(error);
     } else {
-      console.log('-----> SHOP INFO STORED!');
+      console.log('-----> INFO STORED!');
     }
   });
 };
@@ -37,7 +37,7 @@ exports.get = function(callback) {
     if (error) {
       console.error('-----> `GET` ERROR', error);
     } else {
-      console.log('-----> SHOP INFO RETRIEVED!');
+      console.log('-----> INFO RETRIEVED!');
       callback(data);
     }
   });
