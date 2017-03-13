@@ -7,7 +7,6 @@ class Search extends React.Component {
       input: ''
     }
     this.onChange = this.onChange.bind(this);
-    this.onSearch = this.onSearch.bind(this);
   }
 
   onChange(event) {
@@ -20,16 +19,23 @@ class Search extends React.Component {
     }
   }
 
-  onSearch() {
-    this.props.search(this.state.input);
-  }
-
   render() {
+    var style = {
+      width: 150,
+      textAlign: 'center',
+      fontFamily: 'Century Gothic',
+      fontSize: 17.5,
+      border: 0,
+      outline: 0,
+      background: 'transparent',
+      borderBottom: '1px solid black',
+      display: 'inline-block'
+    }
     return (
-    <div>
-      ENTER A ZIP CODE: <input value={this.state.input} onChange={this.onChange} onKeyPress={this.onChange}/>
-      <button onClick={this.onSearch}> MAGIC! </button>
-    </div>)
+      <div>
+        <input placeholder='HMMM...' style={style} value={this.state.input} onChange={this.onChange} onKeyPress={this.onChange}/>
+      </div>
+    )
   }
 }
 

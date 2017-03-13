@@ -4,44 +4,36 @@ class ListItem extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      visited: false
+      color : '#000000',
+      textDecoration : 'none',
     }
     this.onClick = this.onClick.bind(this);
   }
 
   onClick() {
     this.setState ({
-      visited: !this.state.visited
+      textDecoration: 'line-through',
     })
   }
 
   render() {
     var style = {
-      textDecoration : 'none',
-      color : '#008080'
+      color: '#008080',
+      textDecoration: 'none',
+      textTransform: 'uppercase'
     }
 
-    if (this.state.visited) {
-      return (
-      <div onClick={this.onClick}><strike>
-        <b><a href={this.props.shop.url} style={style}> {this.props.shop.name} </a></b>
+    return (
+      <div onClick={this.onClick} style={this.state}>
+        <b><a href={this.props.shop.url} style={style}>
+          {this.props.shop.name}
+        </a></b>
         <div><i>
           rating: {this.props.shop.rating} | {this.props.shop.reviewCount} reviews
         </i></div>
         <hr width='50px'></hr>
-      </strike></div> )
-    }
-
-    else {
-      return (
-      <div onClick={this.onClick}>
-        <b><a href={this.props.shop.url} style={style}> {this.props.shop.name} </a></b>
-        <div><i>
-          rating: {this.props.shop.rating} | {this.props.shop.reviewCount} reviews
-        </i></div>
-        <hr width='50px'></hr>
-      </div> )
-    }
+      </div>
+    )
   }
 }
 

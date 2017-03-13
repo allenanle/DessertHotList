@@ -66,14 +66,15 @@ class App extends React.Component {
 
   render() {
     return (
-    <div>
-      <h1> • DESSERT HIT LIST • </h1>
-      <Search search={this.search}/>
+      <div>
+        <h1> • DESSERT HIT LIST • </h1>
+        <Search search={this.search}/>
 
-      <List hitlist={this.state.hitlist}
-            zipCode={this.state.zipCode}
-      />
-    </div> )
+        <List hitlist={this.state.hitlist}
+              zipCode={this.state.zipCode}
+        />
+      </div>
+    )
   }
 }
 
