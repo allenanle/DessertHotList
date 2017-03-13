@@ -20,7 +20,7 @@ app.use(express.static(__dirname + '/../react-client/dist'));
 app.post('/hitlist/search', function(req, res) {
   // console.log('-----> REQ', req)
   var zipCodeSearch = req.body.zipCode;
-  console.log('-----> ZIPCODE', zipCodeSearch);
+  console.log('-----> `POST` ZIPCODE', zipCodeSearch);
 
   var yelpRequest = {
     url: 'https://api.yelp.com/v3/businesses/search?categories=desserts,bakeries&sort_by=review_count&limit=5&location=' + zipCodeSearch,
@@ -34,15 +34,14 @@ app.post('/hitlist/search', function(req, res) {
   // send GET request to github
   request(yelpRequest, function(error, response, body) {
     if (error) {
-      console.error('-----> YELP ERROR', error);
+      console.error('---> YELP ERROR', error);
     } else {
-      // pass data to models to store into database
       body.businesses.forEach(function(shopObj) {
-        console.log("-----> NAME", shopObj.name);
+        console.log('---> NAME', shopObj.name);
 
-        dbWorker.post(zipCodeSearch, shopObj, function(error) {
-          if (error === null) {
-            res.status(409).send();
+        dbWorker.post(zipCodeSearch, shopObj, function(error, success) {
+          if (error) {
+            res.status(201).send();
           } else {
             res.status(201).send();
           }
@@ -53,7 +52,10 @@ app.post('/hitlist/search', function(req, res) {
 });
 
 app.get('/hitlist', function (req, res) {
-  dbWorker.get(function(data) {
+  var zipCodeSearch = req.query.zipCode;
+  console.log('-----> `GET` ZIPCODE', zipCodeSearch);
+
+  dbWorker.get(zipCodeSearch, function(data) {
       res.status(200).send(data);
   });
 });

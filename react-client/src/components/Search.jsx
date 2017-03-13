@@ -16,7 +16,7 @@ class Search extends React.Component {
     });
 
     if (event.charCode == 13) {
-      this.onSearch();
+      this.props.search(this.state.input);
     }
   }
 
@@ -28,7 +28,7 @@ class Search extends React.Component {
     return (
     <div>
       ENTER A ZIP CODE: <input value={this.state.input} onChange={this.onChange} onKeyPress={this.onChange}/>
-      <button onClick={this.onSearch}>  MAGIC!  </button>
+      <button onClick={this.onSearch}> MAGIC! </button>
     </div>)
   }
 }

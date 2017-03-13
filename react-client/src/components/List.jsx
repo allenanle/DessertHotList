@@ -3,7 +3,7 @@ import ListItem from './ListItem.jsx';
 
 const List = (props) => (
   <div>
-    <h3> HERE'S THE LIST FOR {props.zipCode}... </h3>
+    <h3> HERE'S THE LIST FOR {props.zipCode}! </h3>
     <div>
     { props.hitlist.map(shop => <ListItem key={shop.id} shop={shop}/>)}
     </div>

@@ -20,25 +20,26 @@ exports.post = function(zipCodeSearch, shopData, callback) {
 
   var sqlQuery = 'INSERT INTO dessertShops SET ?;';
 
-  connection.query(sqlQuery, shopInfo, function(error, data) {
+  connection.query(sqlQuery, shopInfo, function(error, success) {
     if (error) {
-      console.error('-----> `POST` ERROR', error);
       callback(error);
+      console.error('---> DUPLICATES');
     } else {
-      console.log('-----> INFO STORED!');
+      callback(null, success);
+      console.log('---> STORED IN DB!');
     }
   });
 };
 
-exports.get = function(callback) {
-  var sqlQuery = 'SELECT * FROM dessertShops;';
+exports.get = function(zipCodeSearch, callback) {
+  var sqlQuery = 'SELECT * FROM dessertShops WHERE zipCode = ?;';
 
-  connection.query(sqlQuery, function(error, data) {
+  connection.query(sqlQuery, zipCodeSearch, function(error, data) {
     if (error) {
-      console.error('-----> `GET` ERROR', error);
+      console.error('---> `GET` ERROR');
     } else {
-      console.log('-----> INFO RETRIEVED!');
       callback(data);
+      console.log('---> RETRIEVED FROM DB!');
     }
   });
 };
