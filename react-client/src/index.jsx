@@ -19,7 +19,7 @@ class App extends React.Component {
 
   // POST
   search(input) {
-    this.setState({
+    this.setState ({
       zipCode: input,
       hitlist: []
     });
@@ -52,7 +52,7 @@ class App extends React.Component {
       data: input,
 
       success: (data) => {
-        this.setState({
+        this.setState ({
           hitlist: data
         })
         console.log('---> RENDERED!')
@@ -64,17 +64,16 @@ class App extends React.Component {
     });
   }
 
-  render () {
+  render() {
     return (
-      <div>
-        <h1> • DESSERT HIT LIST • </h1>
-        <Search search={this.search}/>
+    <div>
+      <h1> • DESSERT HIT LIST • </h1>
+      <Search search={this.search}/>
 
-        <List hitlist={this.state.hitlist}
-              zipCode={this.state.zipCode}
-        />
-      </div>
-    )
+      <List hitlist={this.state.hitlist}
+            zipCode={this.state.zipCode}
+      />
+    </div> )
   }
 }
 

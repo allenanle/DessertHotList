@@ -31,7 +31,7 @@ app.post('/hitlist/search', function(req, res) {
     }
   };
 
-  // send GET request to github
+  // send GET request to Yelp
   request(yelpRequest, function(error, response, body) {
     if (error) {
       console.error('---> YELP ERROR', error);

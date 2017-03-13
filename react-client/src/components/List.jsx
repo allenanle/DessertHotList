@@ -7,7 +7,7 @@ const List = (props) => (
     <div>
     { props.hitlist.map(shop => <ListItem key={shop.id} shop={shop}/>)}
     </div>
-    <h4> Now hurry & go grab a bite at one of these { props.hitlist.length } shops! </h4>
+    <h4> NOW HURRY & GO GRAB A BITE AT ONE OF THESE { props.hitlist.length } SHOPS! </h4>
   </div>
 )
 

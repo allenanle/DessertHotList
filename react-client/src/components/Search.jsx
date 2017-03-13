@@ -10,8 +10,8 @@ class Search extends React.Component {
     this.onSearch = this.onSearch.bind(this);
   }
 
-  onChange (event) {
-    this.setState({
+  onChange(event) {
+    this.setState ({
       input: event.target.value
     });
 
